@@ -25,15 +25,15 @@ jobs:
           cache: "npm"
 
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install
 
       - name: Build
         run: npm run build
         env:
-          REACT_APP_UPLOAD_LINK: ${{ secrets.REACT_APP_UPLOAD_LINK }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_WEATHER_API_KEY: ${{ secrets.REACT_APP_WEATHER_API_KEY }}
-          REACT_APP_RAPID_API_KEY: ${{ secrets.REACT_APP_RAPID_API_KEY }}
+          VITE_UPLOAD_LINK: ${{ secrets.VITE_UPLOAD_LINK }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
+          VITE_RAPID_API_KEY: ${{ secrets.VITE_RAPID_API_KEY }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
