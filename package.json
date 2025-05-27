@@ -1,7 +1,7 @@
 {
   "name": "will-pgm-studio",
   "private": true,
-  "homepage": "https://hankatjac.github.io/will-pgm-studio",
+  "homepage": "https://hankatjac.github.io/will-pgm-studio-vite",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

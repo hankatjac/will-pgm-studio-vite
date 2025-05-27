@@ -8,5 +8,5 @@ export default defineConfig({
   // server: {
   //   port: 3000,
   // },
-  base: "/will-pgm-studio",
+  base: "/will-pgm-studio-vite",
 });

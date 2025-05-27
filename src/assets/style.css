@@ -1,8 +1,10 @@
 /* menu*/
+
+
 header {
   padding: 200px 0 0;
   position: relative;
-  background: #bedd95 url(../img/logos/bg_header.png) no-repeat 50% 0;
+  background: #bedd95 url(/src/assets/img/logos/bg_header.png) no-repeat 50% 0;
 
   .left-part {
     width: 104px;
@@ -10,7 +12,7 @@ header {
     left: -106px;
     top: 3px;
     position: absolute;
-    background: url(../img/logos/bg_left-part.png) no-repeat;
+    background: url(/src/assets/img/logos/bg_left-part.png) no-repeat;
   }
 }
 
@@ -29,7 +31,7 @@ header {
   position: absolute;
   top: 28px;
   left: 50%;
-  background: url(../img/logos/logo.png) no-repeat;
+  background: url(/src/assets/img/logos/logo.png) no-repeat;
 }
 
 .masthead {
