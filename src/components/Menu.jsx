@@ -20,7 +20,7 @@ const Menu = () => {
     };
 
     checkUser();
-  }, [location]);
+  }, [location, logout, setMenuOpen]);
 
   // Close menu when a nav item is clicked
   const closeMenu = () => {
@@ -31,11 +31,7 @@ const Menu = () => {
     <section className="bg-gray-800 text-white border-b border-gray-300">
       <header className="flex items-center justify-between p-4 bg-gray-100">
         <div className="left-part"></div>
-        <Link
-          className="text-xl font-bold  no-underline"
-          id="logo"
-          to="/"
-        >
+        <Link className="text-xl font-bold  no-underline" id="logo" to="/">
           Will-PGM Studio
         </Link>
       </header>
@@ -54,11 +50,7 @@ const Menu = () => {
             aria-label="Toggle navigation"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
-            {menuOpen ? (
-              <FaTimes size={24}  />
-            ) : (
-              <FaBars size={24}  />
-            )}
+            {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
 
@@ -67,10 +59,7 @@ const Menu = () => {
           <div className="flex items-center justify-between py-4">
             <ul className="flex space-x-6 uppercase">
               <li>
-                <Link
-                  className=" hover:text-gray-600 transition-colors"
-                  to="/"
-                >
+                <Link className=" hover:text-gray-600 transition-colors" to="/">
                   {t("home")}
                 </Link>
               </li>
@@ -79,7 +68,7 @@ const Menu = () => {
                   className=" hover:text-gray-600 transition-colors"
                   to="/posts"
                 >
-                  {t("posts")}
+                  {t("blog")}
                 </Link>
               </li>
               <li>
@@ -95,7 +84,7 @@ const Menu = () => {
                   className=" hover:text-gray-600 transition-colors"
                   to="/working-hours"
                 >
-                  calculator
+                  {t("calculator")}
                 </Link>
               </li>
               <li>
@@ -103,7 +92,7 @@ const Menu = () => {
                   className=" hover:text-gray-600 transition-colors"
                   to="/todo"
                 >
-                  todo
+                  {t("todo")}
                 </Link>
               </li>
               <li>
@@ -111,7 +100,7 @@ const Menu = () => {
                   className=" hover:text-gray-600 transition-colors"
                   to="/recipe"
                 >
-                  food recipe
+                  {t("food recipe")}
                 </Link>
               </li>
               <li>
@@ -119,7 +108,7 @@ const Menu = () => {
                   className=" hover:text-gray-600 transition-colors"
                   to="/weather"
                 >
-                  weather
+                  {t("weather")}
                 </Link>
               </li>
               <li>

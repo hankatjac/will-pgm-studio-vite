@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import { useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { geoApiOptions, GEO_API_URL } from "../api";
 import axios from "axios";
 
 const Search = ({ fetchWeatherData }) => {
-  // const [search, setSearch] = useState('Montreal');
+  const [search, setSearch] = useState("Montreal");
 
   // const loadOptions = async (inputValue) => {
   //   return fetch(
@@ -42,10 +42,9 @@ const Search = ({ fetchWeatherData }) => {
       return { options: [] }; // Return an empty array in case of an error
     }
   };
-   
 
   const handleOnChange = (data) => {
-    // setSearch(data);
+    setSearch(data);
     fetchWeatherData(data);
   };
 
@@ -53,10 +52,10 @@ const Search = ({ fetchWeatherData }) => {
     <AsyncPaginate
       placeholder="Search for city"
       debounceTimeout={600}
-      // value={search}
+      value={search}
       onChange={handleOnChange}
       loadOptions={loadOptions}
-      inputValue="Montreal"
+      // inputValue="Montreal"
     />
   );
 };

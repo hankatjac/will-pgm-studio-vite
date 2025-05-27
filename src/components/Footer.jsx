@@ -37,8 +37,7 @@ const Footer = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {posts
-              .slice(-4)
-              .reverse()
+              .slice(0,4) // Display only the latest 4 posts
               .map((post) => (
                 <div key={post.id} className="flex flex-col items-start">
                   <Link

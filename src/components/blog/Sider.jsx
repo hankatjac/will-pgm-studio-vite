@@ -22,7 +22,7 @@ const Sider = () => {
               onChange={handleChange}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && keyword) {
-                  window.location.href = `/posts/?search=${keyword}`;
+                  window.location.href = `/will-pgm-studio-vite/posts/?search=${keyword}`;
                 }
               }}
             />

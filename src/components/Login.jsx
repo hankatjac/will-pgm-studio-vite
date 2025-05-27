@@ -14,21 +14,21 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const { login } = useContext(AppContext);
 
   const submitForm = async (data) => {
     console.log(data);
-    setLoading(true);
+    setIsLoading(true);
     setMessage("");
 
     try {
       await login(data);
       navigate("/");
     } catch (err) {
-      setLoading(false);
+      setIsLoading(false);
       setMessage(err.response.data);
     }
   };
@@ -71,8 +71,10 @@ const Login = () => {
 
         <div className="text-center">
           <p className="text-red-500">{message}</p>
-          {loading ? (
-            <p className="text-gray-500">Loading...</p>
+          {isLoading ? (
+                  <div className="flex justify-center items-center py-10">
+            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
           ) : (
             <button
               className="w-full py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition duration-200"

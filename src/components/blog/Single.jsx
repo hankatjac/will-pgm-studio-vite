@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "./Like";
 import axios from "axios";
@@ -85,7 +85,7 @@ const Single = () => {
             ) : (
               <p
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(post.desc?.substring(0, 500)),
+                  __html: DOMPurify.sanitize(post.desc?.substring(0, 1000)),
                 }}
               ></p>
             )}

@@ -59,7 +59,7 @@ const Blog = () => {
                   <p
                     className="mt-3 text-gray-600"
                     dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(post.desc?.substring(0, 200)),
+                      __html: DOMPurify.sanitize(post.desc?.substring(0, 500)),
                     }}
                   ></p>
                 </div>

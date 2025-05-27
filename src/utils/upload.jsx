@@ -12,6 +12,7 @@ export const uploadToCloudinary = async (file) => {
   try {
     const res = await axios.post(import.meta.env.VITE_UPLOAD_LINK, data, {
       withCredentials: false, // Ensure credentials are not included
+      secure: true, // Use secure connection
     });
     console.log("Cloudinary response:", res.data);
     const { url, public_id } = res.data;
