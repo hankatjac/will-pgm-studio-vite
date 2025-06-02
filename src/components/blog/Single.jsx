@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Like from "./Like";
 import axios from "axios";
 import moment from "moment";
@@ -8,24 +8,47 @@ import Sider from "./Sider";
 import { AppContext } from "../../contexts/appContext";
 import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
-import getCurrentUser from "../../utils/getCurrentUser";
 import Confirm from "../Confirm";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { MdOutlineTextsms } from "react-icons/md";
+import Comments from "./Comments";
 
 const Single = () => {
-  // const { id } = useParams();
+  const { id } = useParams();
   const [readMore, setReadMore] = useState(false);
   const navigate = useNavigate();
   // const location = useLocation();
   // const postId = location.pathname.split("/")[2];
   // console.log(location.pathname.split("/"))
-  const { logout, deletePostImage } = useContext(AppContext);
-  const currentUser = getCurrentUser();
+  const { logout, deletePostImage, currentUser } = useContext(AppContext);
   const post = useLocation().state;
   const [openDialog, setOpenDialog] = useState(false);
+  const [likes, setLikes] = useState([]);
+  const [commentOpen, setCommentOpen] = useState(false);
+  const [fetch, setFetch] = useState(true);
+
+  useEffect(() => {
+    const fetchLikeData = async () => {
+      if (!id) return; // Ensure id is defined
+      if (fetch) {
+        try {
+          const res = await axios.get(
+            `${import.meta.env.VITE_API_URL}/like?postId=${id}`
+          );
+          setLikes(res.data);
+        } catch (err) {
+          console.log(err);
+        }
+        setFetch(false);
+      }
+      // console.log("Fetching likes for post ID:", id);
+    };
+    fetchLikeData();
+  }, [id, fetch]);
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post.id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/post/${post.id}`);
       navigate("/posts");
     } catch (err) {
       console.log(err);
@@ -37,6 +60,51 @@ const Single = () => {
     }
     deletePostImage(post.imgId);
   };
+
+  const handleLike = async () => {
+    if (!currentUser) {
+      alert("You must be logged in to like a post.");
+      navigate("/login");
+      return;
+    }
+    let liked = likes.includes(currentUser.id);
+    // console.log(liked);
+    if (liked) {
+      try {
+        await axios.delete(`${import.meta.env.VITE_API_URL}/like?postId=${id}`);
+        setFetch(true); // Only trigger fetch after API call completes
+      } catch (err) {
+        // console.log(err);
+        alert(err.response.data);
+        if (err.response.status === 401) {
+          logout();
+          navigate("/login");
+        }
+      }
+    } else {
+      try {
+        await axios.post(`${import.meta.env.VITE_API_URL}/like`, {
+          postId: id,
+        });
+        setFetch(true); // Only trigger fetch after API call completes
+      } catch (err) {
+        // console.log(err);
+        alert(err.response.data);
+        if (err.response.status === 401) {
+          logout();
+          navigate("/login");
+        }
+      }
+    }
+  };
+
+  if (!post) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="text-center text-gray-500">Post not found.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -95,6 +163,44 @@ const Single = () => {
             >
               {readMore ? "Show less" : "Show more"}
             </button>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {/* Like Button Section */}
+            <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+              {likes.includes(currentUser?.id) ? (
+                <AiFillHeart
+                  onClick={handleLike}
+                  className="text-rose-500 text-2xl cursor-pointer hover:scale-105 active:scale-95 transition-all duration-200"
+                />
+              ) : (
+                <AiOutlineHeart
+                  onClick={handleLike}
+                  className="text-gray-500 text-2xl cursor-pointer hover:scale-105 active:scale-95 transition-all duration-200 hover:text-rose-400"
+                />
+              )}
+              <span className="text-sm font-medium text-gray-600">
+                {likes?.length} {likes?.length === 1 ? "Like" : "Likes"}
+              </span>
+            </div>
+
+            {/* Comments Toggle */}
+            <button
+              className="flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors p-2 rounded-lg hover:bg-gray-50 w-fit"
+              onClick={() => setCommentOpen(!commentOpen)}
+            >
+              <MdOutlineTextsms className="text-xl" />
+              <span className="text-sm font-medium">
+                {commentOpen ? "Hide Comments" : "See Comments"}
+              </span>
+            </button>
+
+            {/* Comments Section */}
+            {commentOpen && (
+              <div className="mt-2">
+                <Comments postId={id} />
+              </div>
+            )}
           </div>
         </div>
 

@@ -3,24 +3,25 @@ import { Link, useLocation } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../contexts/appContext";
-import getCurrentUser from "../utils/getCurrentUser";
+// import getCurrentUser from "../utils/getCurrentUser";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Menu = () => {
-  const { logout } = useContext(AppContext);
-  const [currentUser, setCurentUser] = useState("");
+  const { logout, currentUser } = useContext(AppContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const { t } = useTranslation();
-  const location = useLocation();
+  // const [currentUser, setCurentUser] = useState("");
 
-  useEffect(() => {
-    const checkUser = async () => {
-      const user = getCurrentUser();
-      setCurentUser(user);
-    };
+  // const location = useLocation();
 
-    checkUser();
-  }, [location, logout, setMenuOpen]);
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     const user = getCurrentUser();
+  //     setCurentUser(user);
+  //   };
+
+  //   checkUser();
+  // }, [location, logout, setMenuOpen]);
 
   // Close menu when a nav item is clicked
   const closeMenu = () => {

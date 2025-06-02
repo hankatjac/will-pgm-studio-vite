@@ -25,7 +25,7 @@ const Todo = () => {
       setIsLoading(true);
       const fetchData = async () => {
         try {
-          const res = await axios.get(`${import.meta.env.VITE_API_URL}/todos`);
+          const res = await axios.get(`${import.meta.env.VITE_API_URL}/todo`);
           setTasks(res.data);
         } catch (err) {
           if (err.response.status === 401) {
@@ -45,7 +45,7 @@ const Todo = () => {
   // Add Task
   const addTask = async (task) => {
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/todos/`, task);
+      await axios.post(`${import.meta.env.VITE_API_URL}/todo/`, task);
       setFetch(true);
     } catch (err) {
       alert(err.response.data.message);
@@ -62,7 +62,7 @@ const Todo = () => {
     const updatedTask = { ...task, reminder: !task.reminder };
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/todos/${task.id}`,
+        `${import.meta.env.VITE_API_URL}/todo/${task.id}`,
         updatedTask
       );
     } catch (err) {
@@ -87,7 +87,7 @@ const Todo = () => {
   const handleEditTask = async (task) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/todos/${task.id}`,
+        `${import.meta.env.VITE_API_URL}/todo/${task.id}`,
         task
       );
     } catch (err) {
@@ -110,7 +110,7 @@ const Todo = () => {
   const confirmDeleteTask = async () => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_API_URL}/todos/${taskIdToDelete}`
+        `${import.meta.env.VITE_API_URL}/todo/${taskIdToDelete}`
       );
       setFetch(true);
       setOpenDialog(false);

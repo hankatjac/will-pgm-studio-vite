@@ -20,7 +20,7 @@ const Event = () => {
 
   const addEvent = async (event) => {
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/events/`, event);
+      await axios.post(`${import.meta.env.VITE_API_URL}/event/`, event);
       await getEvents();
     } catch (err) {
       alert(err.response.data.message);
@@ -35,7 +35,7 @@ const Event = () => {
   const updateEvent = async (event) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/events/${event.id}`,
+        `${import.meta.env.VITE_API_URL}/event/${event.id}`,
         event
       );
       await getEvents();
@@ -57,7 +57,7 @@ const Event = () => {
   const confirmDeleteEvent = async () => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_API_URL}/events/${eventIdToDelete}`
+        `${import.meta.env.VITE_API_URL}/event/${eventIdToDelete}`
       );
       await getEvents();
       setOpenDialog(false);

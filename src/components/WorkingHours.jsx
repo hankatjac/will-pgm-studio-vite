@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 
 const WorkingHours = () => {
@@ -31,12 +31,7 @@ const WorkingHours = () => {
   var startTimeF = moment(startF, "hh:mm");
   var endTimeF = moment(endF, " hh:mm");
   var diffF = endTimeF.diff(startTimeF, "hours", true) || 0;
-  //   useEffect(() => {
-  //     if (endTime < startTime) {
 
-  //       alert("erro");
-  //     }
-  //   }, [start, endTime]);W
   return (
     <div className="container mx-auto my-5 p-6 bg-white rounded shadow-md">
       {/* Header Row */}
@@ -78,7 +73,7 @@ const WorkingHours = () => {
         <label className="text-gray-700 font-medium">Total Hours</label>
         <div></div>
         <div></div>
-        <div>{diffM + diffT + diffW + diffTu + diffF}</div>
+        <div>{(diffM + diffT + diffW + diffTu + diffF).toFixed(2)}</div>
       </div>
     </div>
   );

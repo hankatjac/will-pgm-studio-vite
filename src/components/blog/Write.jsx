@@ -111,7 +111,7 @@ const Write = () => {
     try {
       if (blog) {
         setIsLoading(true);
-        await axios.put(`${import.meta.env.VITE_API_URL}/posts/${blog.id}`, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/post/${blog.id}`, {
           title,
           desc: value,
           cat,
@@ -121,7 +121,7 @@ const Write = () => {
         file && deletePostImage(blog.imgId);
       } else {
         setIsLoading(true);
-        await axios.post(`${import.meta.env.VITE_API_URL}/posts/`, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/post/`, {
           title,
           desc: value,
           cat,

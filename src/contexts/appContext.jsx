@@ -50,7 +50,7 @@ export const AppContextProvider = ({ children }) => {
 
   const getEvents = useCallback(async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/events`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/event`);
       const data = res.data;
       const formattedEvents = data.map((event) => ({
         ...event,
@@ -69,7 +69,7 @@ export const AppContextProvider = ({ children }) => {
   const fetchPosts = useCallback(async (query = "") => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/posts${query}`
+        `${import.meta.env.VITE_API_URL}/post${query}`
       );
       return res.data;
     } catch (err) {
