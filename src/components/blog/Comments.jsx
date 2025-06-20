@@ -1,7 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../contexts/appContext";
 import axios from "axios";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 import { useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 
@@ -101,7 +103,7 @@ const Comments = ({ postId }) => {
             <p className="text-gray-600 mt-1">{comment.desc}</p>
           </div>
           <span className="text-xs text-gray-400">
-            {moment(comment.createdAt).fromNow()}
+            {dayjs(comment.createdAt).fromNow()}
           </span>
 
           {currentUser.id === comment.userId && (
